@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Portal - Profile</title>
+    <link rel="stylesheet" href="profile.css">
+</head>
+<body>
+    
+    <header>
+        <div class="container">
+            <h1>Welcome, <span id="full-name">Loading...</span>!</h1>
+            <nav>
+                <a href="attendance.html">Attendance</a>
+                <a href="update-profile.html">Update Profile</a>
+                <a href="cgpa.html">CGPA</a> 
+                <a href="index.html">Logout</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="profile-container">
+        <div class="profile-details">
+            <div class="profile-info">
+                <p><strong>First Name: </strong> <span id="full-name-info">Loading...</span></p>
+                <p><strong>Last Name: </strong> <span id="last-name">Loading...</span></p>
+                <p><strong>Email: </strong> <span id="email">Loading...</span></p>
+                <p><strong>Username: </strong> <span id="username">Loading...</span></p>
+                <p><strong>Sub Section: </strong> <span id="sub-section">Loading...</span></p>
+            </div>
+            <div class="profile-pic">
+                <img src="uploads/default.jpeg" alt="Profile Picture" id="profile-pic" />
+            </div>
+        </div>
+    </section>
+
+     <!-- Section for uploading profile picture -->
+     <!-- <section class="upload-profile-pic">
+        <h3>Update Profile Picture</h3>
+        <form action="/upload-profile-pic" method="POST" enctype="multipart/form-data">
+            <input type="hidden" name="id" value="123103122" id="user-id"> <!-- Hidden input for roll number -->
+            <!-- <input type="file" name="profile-pic" accept="image/jpeg" required>
+            <button type="submit">Update Profile Picture</button>
+        </form>
+    </section> -->
+
+    <!-- Section for updating class details manually -->
+    <!-- <section class="update-class-details">
+        <h3>Update Class Attendance</h3>
+        <form action="/update-attendance-manual" method="POST" id="attendance-form">
+            <label for="db-present">Database Present Classes:</label>
+            <input type="number" name="db-present" id="db-present" min="0" required>
+
+            <label for="db-absent">Database Absent Classes:</label>
+            <input type="number" name="db-absent" id="db-absent" min="0" required>
+
+            <label for="ai-present">AI Present Classes:</label>
+            <input type="number" name="ai-present" id="ai-present" min="0" required>
+
+            <label for="ai-absent">AI Absent Classes:</label>
+            <input type="number" name="ai-absent" id="ai-absent" min="0" required>
+
+            <label for="cn-present">CN Present Classes:</label>
+            <input type="number" name="cn-present" id="cn-present" min="0" required>
+
+            <label for="cn-absent">CN Absent Classes:</label>
+            <input type="number" name="cn-absent" id="cn-absent" min="0" required>
+
+            <label for="os-present">OS Present Classes:</label>
+            <input type="number" name="os-present" id="os-present" min="0" required>
+
+            <label for="os-absent">OS Absent Classes:</label>
+            <input type="number" name="os-absent" id="os-absent" min="0" required>
+
+            <label for="cp-present">CP Present Classes:</label>
+            <input type="number" name="cp-present" id="cp-present" min="0" required>
+
+            <label for="cp-absent">CP Absent Classes:</label>
+            <input type="number" name="cp-absent" id="cp-absent" min="0" required>
+
+
+            <button type="submit">Update Attendance</button>
+        </form>
+    </section> */ -->
+
+
+    <footer>
+        <p>&copy; 2025 Student Portal</p>
+    </footer>
+
+    <script>
+        // Fetch user profile data to display
+        fetch('/profile')
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('username').innerText = data.username;
+                document.getElementById('full-name').innerText = data.full_name;
+                document.getElementById('full-name-info').innerText = data.full_name;
+                document.getElementById('email').innerText = data.email;
+                document.getElementById('last-name').innerText = data.last_name;
+                document.getElementById('sub-section').innerText = data.sub_section;
+
+                let profilePic = data.profile_pic || 'uploads/default.jpeg';
+                fetch(profilePic, { method: 'HEAD' })
+                    .then(response => {
+                        if (response.ok) {
+                            document.getElementById('profile-pic').src = profilePic;
+                        } else {
+                            document.getElementById('profile-pic').src = 'uploads/default.jpeg';
+                        }
+                    })
+                    .catch(() => {
+                        document.getElementById('profile-pic').src = 'uploads/default.jpeg';
+                    });
+            })
+            .catch(error => {
+                console.error('Error fetching profile:', error);
+                alert('Failed to load profile');
+            });
+            document.getElementById('attendance-form').addEventListener('submit', function (e) {
+    e.preventDefault(); // Prevent form submission from refreshing the page
+
+    // Collect data from the form
+    // const db_present = document.getElementById('db_present').value;
+    // const db_absent = document.getElementById('db_absent').value;
+    // const ai_present = document.getElementById('ai_present').value;
+    // const ai_absent = document.getElementById('ai_absent').value;
+    // const cn_present = document.getElementById('cn_present').value;
+    // const cn_absent = document.getElementById('cn_absent').value;
+    // const os_present = document.getElementById('os_present').value;
+    // const os_absent = document.getElementById('os_absent').value;
+    // const cp_present = document.getElementById('cp_present').value;
+    // const cp_absent = document.getElementById('cp_absent').value;
+    // // const rollNo = document.getElementById('rollNo').value;
+
+    // // Send the data via axios
+    // axios.post('/update-attendance-manual', {
+    //     db_present,
+    //     db_absent,
+    //     ai_present,
+    //     ai_absent,
+    //     cn_present,
+    //     cn_absent,
+    //     os_present,
+    //     os_absent,
+    //     cp_present,
+    //     cp_absent
+    // })
+    // .then(response => {
+    //     console.log(response.data); // Handle the success response
+    //     alert("Attendance updated successfully!");
+    // })
+    // .catch(error => {
+    //     console.error(error); // Handle the error response
+    //     alert("Failed to update attendance.");
+    // });
+});
+
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,261 @@
+/* Global Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
+
+body {
+    background-color: #f7f7f7;
+    color: #333;
+    line-height: 1.6;
+    font-size: 16px;
+}
+
+h1, h3 {
+    color: #333;
+    font-weight: 600;
+}
+
+a {
+    text-decoration: none;
+    color: #333;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: #007bff;
+}
+
+/* Header Styles */
+header {
+    background-color: #007bff;
+    padding: 20px 0;
+    color: #fff;
+}
+
+header .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header h1 {
+    font-size: 24px;
+}
+
+nav a {
+    margin-left: 20px;
+    font-size: 16px;
+}
+
+nav a:first-child {
+    margin-left: 0;
+}
+
+/* Main Section Styles */
+section {
+    padding: 40px 20px;
+    margin: 20px 0;
+    background-color: #fff;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+section h3 {
+    font-size: 22px;
+    margin-bottom: 20px;
+    color: #007bff;
+}
+
+form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; /* Space between input fields */
+}
+
+form label {
+    margin-bottom: 8px;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+form input {
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    width: 100%;
+}
+
+form input:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+form button {
+    padding: 12px 20px;
+    border: none;
+    background-color: #007bff;
+    color: #fff;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+form button:hover {
+    background-color: #0056b3;
+}
+.upload-profile-pic{
+    padding-left: 100px;
+    padding-right: 100px;
+}
+/* Profile Picture Upload Section */
+.upload-profile-pic input[type="file"] {
+    border: none;
+    padding: 10px;
+    width: 300px;
+    background-color: #f0f0f0;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.upload-profile-pic input[type="file"]:hover {
+    background-color: #e0e0e0;
+}
+
+.upload-profile-pic button {
+    padding: 12px 20px;
+    border: none;
+    background-color: #28a745;
+    color: #fff;
+    font-size: 16px;
+    height: 45px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.upload-profile-pic button:hover {
+    background-color: #218838;
+}
+
+/* Attendance Section */
+.update-attendance{
+    padding-left: 100px;
+    padding-right: 100px;
+}
+.update-attendance input[type="number"] {
+    width: 100%;
+    max-width: 400px;
+}
+
+.update-attendance label {
+    margin-bottom: 5px;
+}
+
+.update-attendance input {
+    width: 100%;
+    max-width: 400px;
+    padding: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.update-attendance button {
+    padding: 12px 20px;
+    border: none;
+    background-color: #17a2b8;
+    color: #fff;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.update-attendance button:hover {
+    background-color: #138496;
+}
+
+/* Arrange input fields in 2 fields per row */
+.form-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    width: 100%;
+}
+
+.form-row .form-group {
+    flex-basis: calc(50% - 20px); /* Each group takes 1/2 of the space */
+    display: flex;
+    flex-direction: column;
+}
+
+.form-row .form-group label {
+    margin-bottom: 8px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    header .container {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    header h1 {
+        font-size: 22px;
+        margin-bottom: 10px;
+    }
+
+    nav {
+        display: flex;
+        flex-direction: column;
+    }
+
+    nav a {
+        margin-left: 0;
+        margin-bottom: 10px;
+    }
+
+    section {
+        padding: 20px;
+    }
+
+    form input,
+    form button {
+        font-size: 14px;
+    }
+
+    footer p {
+        font-size: 12px;
+    }
+
+    /* On smaller screens, make the form fields stack vertically */
+    .form-row .form-group {
+        flex-basis: 100%;
+    }
+}
+
+/* Footer Styles */
+footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 15px 0;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
+footer p {
+    font-size: 14px;
+}

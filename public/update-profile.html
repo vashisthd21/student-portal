@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Update Profile</title>
+    <link rel="stylesheet" href="update.css" />
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Update Profile</h1>
+            <nav>
+                <a href="profile.html">Profile</a>
+                <a href="attendance.html">Attendance</a>
+                <a href="cgpa.html">CGPA</a>
+                <a href="/logout">Logout</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Section: Update Profile Information -->
+    <section class="update-profile">
+        <h3>Update Profile Information</h3>
+        <form id="update-profile-form">
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="first-name">First Name:</label>
+                    <input type="text" id="first-name" name="first-name" required />
+                </div>
+                <div class="form-group">
+                    <label for="last-name">Last Name:</label>
+                    <input type="text" id="last-name" name="last-name" required />
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required />
+                </div>
+                <div class="form-group">
+                    <label for="sub-section">Sub Section:</label>
+                    <input type="text" id="sub-section" name="sub-section" required />
+                </div>
+            </div>
+            <input type="hidden" id="user-id" name="user-id" />
+            <button type="submit">Update Profile</button>
+        </form>
+    </section>
+
+    <!-- Section: Update Profile Picture -->
+    <section class="upload-profile-pic">
+        <h3>Update Profile Picture</h3>
+        <form id="upload-pic-form" enctype="multipart/form-data">
+            <input type="file" name="profile-pic" accept="image/jpeg" required />
+            <input type="hidden" name="user-id" id="user-id-pic" />
+            <button type="submit">Update Profile Picture</button>
+        </form>
+    </section>
+
+    <!-- Section: Update Attendance (Optional, can expand later) -->
+    <section class="update-attendance">
+        <h3>Update Class Attendance</h3>
+        <form id="attendance-form">
+            <!-- Add fields if needed -->
+            <button type="submit">Update Attendance</button>
+        </form>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Student Portal</p>
+    </footer>
+
+    <script>
+    // Fetch user data and populate form
+    fetch('/profile')
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('first-name').value = data.full_name;
+            document.getElementById('last-name').value = data.last_name;
+            document.getElementById('email').value = data.email;
+            document.getElementById('sub-section').value = data.sub_section;
+
+            // Set user ID in hidden field
+            document.getElementById('user-id').value = data.username;  // OR data.id, based on what your /profile returns
+            document.getElementById('user-id-pic').value = data.username;
+        })
+        .catch(error => {
+            console.error('Error fetching profile data:', error);
+            alert('Failed to load profile data');
+        });
+
+    // Handle profile update
+    document.getElementById('update-profile-form').addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        const userId = document.getElementById('user-id').value;
+        const fullName = document.getElementById('first-name').value;
+        const lastName = document.getElementById('last-name').value;
+        const email = document.getElementById('email').value;
+        const subSection = document.getElementById('sub-section').value;
+
+        fetch('/update-profile', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                user_id: userId,
+                full_name: fullName,
+                last_name: lastName,
+                email: email,
+                sub_section: subSection
+            })
+        })
+        .then(res => res.json())
+        .then(data => {
+            if (data.success) {
+                alert('Profile updated successfully!');
+                window.location.href = 'profile.html';
+            } else {
+                alert('Failed to update profile: ' + data.message);
+            }
+        })
+        .catch(error => {
+            console.error('Error updating profile:', error);
+            alert('Error occurred');
+        });
+    });
+</script>
+
+</body>
+</html>

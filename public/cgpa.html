@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Portal - CGPA</title>
+    <link rel="stylesheet" href="cgpa.css">
+</head>
+<body>
+    
+    <header>
+        <div class="container">
+            <h1>CGPA Details</h1>
+            <nav>
+                <a href="attendance.html">Attendance</a>
+                <a href="profile.html">Profile</a>
+                <a href="/logout">Logout</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="cgpa-container">
+        <h2>Your CGPA Information</h2>
+        <div class="cgpa-details">
+            <p><strong>CGPA Semester 1: </strong> <span id="sgpa-sem1">Loading...</span></p>
+            <p><strong>CGPA Semester 2: </strong> <span id="sgpa-sem2">Loading...</span></p>
+            <p><strong>SGPA: </strong> <span id="cgpa">Loading...</span></p>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Student Portal</p>
+    </footer>
+
+    <script>
+        // Fetch CGPA data from the server
+        fetch('/cgpa')
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                document.getElementById('sgpa-sem1').innerText = data.sgpa_sem1 || 'RE';
+                document.getElementById('sgpa-sem2').innerText = data.sgpa_sem2 || 'RE';
+                if(data.cgpa_sem1 === 0 || data.cgpa_sem2 === 0 ){
+                    document.getElementById('cgpa').innerText = 'Not Defined';
+
+                }
+                else{
+                    document.getElementById('cgpa').innerText = data.cgpa || 'N/A';
+                }
+            })
+            .catch(error => {
+                console.error('Error fetching CGPA:', error);
+                alert('Failed to load CGPA data');
+            });
+    </script>
+
+</body>
+</html>
