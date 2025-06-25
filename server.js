@@ -116,7 +116,7 @@ app.get('/cgpa', async(req, res) => {
         const userId = req.session.username;
         try{
             const result = await pool.query(
-                'SELECT sgpa_sem1, sgpa_sem2, cgpa FROM students WHERE username = $1', [userId]
+                'SELECT sgpa_sem1, sgpa_sem2, sgpa_sem3, sgpa_sem4, cgpa FROM students WHERE username = $1', [userId]
             );
             if (result.rows.length > 0) {
                 const user = result.rows[0];
